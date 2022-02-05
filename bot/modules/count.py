@@ -5,7 +5,7 @@ from bot.helper.mirror_utils.upload_utils.gdriveTools import GoogleDriveHelper
 from bot.helper.telegram_helper.message_utils import deleteMessage, sendMessage
 from bot.helper.telegram_helper.filters import CustomFilters
 from bot.helper.telegram_helper.bot_commands import BotCommands
-from bot.helper.ext_utils.bot_utils import is_gdrive_link, is_gdtot_link, new_thread
+from bot.helper.ext_utils.bot_utils import is_gdrive_link, is_gdtot_link, new_thread, appdrive_dl
 from bot.helper.mirror_utils.download_utils.direct_link_generator import gdtot
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkException
 
@@ -28,6 +28,20 @@ def countNode(update, context):
         else:
             tag = reply_to.from_user.mention_html(reply_to.from_user.first_name)
     gdtot_link = is_gdtot_link(link)
+    if 'driveapp.in' in link:
+       is_driveapp = True
+    if 'appdrive.in' in link:
+       is_appdrive = True
+    if is_driveapp:
+        try:
+            link = appdrive_dl(link)
+        except DirectDownloadLinkException as e:
+            return sendMessage(str(e), context.bot, update)
+    if is_appdrive:
+        try:
+            link = appdrive_dl(link)
+        except DirectDownloadLinkException as e:
+            return sendMessage(str(e), context.bot, update)
     if gdtot_link:
         try:
             link = gdtot(link)
