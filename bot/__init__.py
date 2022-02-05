@@ -420,6 +420,18 @@ try:
 except KeyError:
     CRYPT = None
 try:
+    EMAIL = getConfig('EMAIL')
+    if len(EMAIL) == 0:
+        raise KeyError
+except KeyError:
+    EMAIL = None
+try:
+    PWSSD = getConfig('PWSSD')
+    if len(RSS_COMMAND) == 0:
+        raise KeyError
+except KeyError:
+    PWSSD = None
+try:
     TOKEN_PICKLE_URL = getConfig('TOKEN_PICKLE_URL')
     if len(TOKEN_PICKLE_URL) == 0:
         raise KeyError
