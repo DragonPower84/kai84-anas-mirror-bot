@@ -435,8 +435,8 @@ try:
     CLONE_LOACTION = getConfig('CLONE_LOACTION')
     if len(CLONE_LOACTION) == 0:
         raise KeyError
-    else:
-        CLONE_LOACTION = ''
+except KeyError:
+    CLONE_LOACTION = ''
 try:
     TOKEN_PICKLE_URL = getConfig('TOKEN_PICKLE_URL')
     if len(TOKEN_PICKLE_URL) == 0:
