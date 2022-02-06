@@ -417,7 +417,7 @@ def gdtot(url: str) -> str:
         raise DirectDownloadLinkException("ERROR: Try in your broswer, mostly file not found!")
     return f'https://drive.google.com/open?id={decoded_id}'
 
-def  appdrive_dl(url: str) -> str:
+def appdrive_dl(url: str) -> str:
     account = {'email': EMAIL, 'passwd': PWSSD}
     client = requests.Session()
     client.headers.update({
