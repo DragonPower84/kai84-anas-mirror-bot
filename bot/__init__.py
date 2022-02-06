@@ -427,7 +427,7 @@ except KeyError:
     EMAIL = None
 try:
     PWSSD = getConfig('PWSSD')
-    if len(RSS_COMMAND) == 0:
+    if len(PWSSD) == 0:
         raise KeyError
 except KeyError:
     PWSSD = None
