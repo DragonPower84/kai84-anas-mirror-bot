@@ -419,6 +419,8 @@ def gdtot(url: str) -> str:
     return f'https://drive.google.com/open?id={decoded_id}'
 
 def appdrive_dl(url: str) -> str:
+    if EMAIL is None or PWSSD is None:
+        raise DirectDownloadLinkException("Appdrive Cred Is Not Given")
     account = {'email': EMAIL, 'passwd': PWSSD}
     client = requests.Session()
     client.headers.update({
@@ -482,4 +484,6 @@ def appdrive_dl(url: str) -> str:
         drive_link = etree.HTML(res.content).xpath("//a[contains(@class,'btn')]/@href")[0]
         info_parsed['gdrive_link'] = drive_link
     info_parsed['src_url'] = url
+    if info_parsed['error']:
+        raise DirectDownloadLinkException(f"{info_parsed['error_message']}")
     return info_parsed["gdrive_link"]
